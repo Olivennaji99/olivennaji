@@ -72,7 +72,7 @@ export function Process() {
   return (
     <section id="process" aria-labelledby="process-title" className="mx-auto w-full max-w-375 scroll-mt-28 px-4 pt-16 lg:px-8 lg:pt-20">
       <CenteredHeading id="process-title" eyebrow={workflow.eyebrow} title={workflow.heading} intro={workflow.intro} />
-      <ol className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5">
+      <ol className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5">
         {workflow.steps.map((step, i) => (
           <li
             key={step.title}

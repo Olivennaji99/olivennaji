@@ -34,7 +34,7 @@ export default function Services() {
             <h3 className="mb-4 text-xl font-bold text-ink">{group.title}</h3>
             <ul
               aria-label={`${group.title} services`}
-              className="no-scrollbar -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-4 pb-4 sm:mx-0 sm:grid sm:grid-cols-3 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-5"
+              className="no-scrollbar -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-4 pb-4 sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 md:grid-cols-3 xl:grid-cols-5"
             >
               {group.items.map((item) => (
                 <li key={item.name} className="w-[72%] shrink-0 snap-start sm:w-auto sm:shrink">

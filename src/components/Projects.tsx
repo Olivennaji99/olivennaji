@@ -24,15 +24,15 @@ export default function Projects() {
               <article
                 id={p.slug}
                 className={`group relative flex h-full flex-col overflow-hidden rounded-2xl border border-accent/15 bg-surface shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-accent/15 dark:border-white/10 ${
-                  p.featured ? "lg:flex-row" : ""
+                  p.featured ? "xl:flex-row" : ""
                 }`}
               >
-                <div className={`relative aspect-video overflow-hidden ${p.featured ? "lg:aspect-auto lg:min-h-80 lg:w-[58%] lg:shrink-0" : ""}`}>
+                <div className={`relative aspect-video overflow-hidden ${p.featured ? "xl:aspect-auto xl:min-h-80 xl:w-[58%] xl:shrink-0" : ""}`}>
                   <ImageSlot
                     base={`images/projects/${p.image}`}
                     alt={`${p.title} screenshot`}
                     hint="cover · 1280 × 720"
-                    sizes={p.featured ? "(min-width: 1024px) 38vw, (min-width: 768px) 92vw, 92vw" : "(min-width: 1024px) 30vw, (min-width: 768px) 45vw, 92vw"}
+                    sizes={p.featured ? "(min-width: 1280px) 38vw, (min-width: 1024px) 62vw, 92vw" : "(min-width: 1024px) 30vw, (min-width: 768px) 45vw, 92vw"}
                     className="h-full w-full"
                     imgClassName={`object-cover ${p.position} transition-transform duration-700 group-hover:scale-110`}
                   />

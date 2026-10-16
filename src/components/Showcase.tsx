@@ -33,7 +33,7 @@ function renderCell(cell: Cell, key: string) {
             base={img?.src ?? `images/showcase/${cell.n}`}
             alt={img?.alt ?? `Screenshot ${cell.n} from a recent web project`}
             hint="800 × 1000"
-            sizes="(min-width: 1024px) 20vw, 44vw"
+            sizes="(min-width: 1280px) 20vw, (min-width: 768px) 31vw, 44vw"
             className="h-full w-full bg-soft"
             imgClassName={`object-cover ${img?.position ?? ""} transition-transform duration-700 group-hover:scale-105`}
           />
@@ -88,9 +88,9 @@ export default function Showcase() {
         </h2>
       </div>
 
-      <div className="no-scrollbar -mx-4 flex h-[400px] snap-x snap-mandatory gap-3 overflow-x-auto scroll-smooth px-4 lg:mx-0 lg:grid lg:h-[540px] lg:grid-cols-5 lg:overflow-visible lg:px-0">
+      <div className="no-scrollbar -mx-4 flex h-[400px] snap-x snap-mandatory gap-3 overflow-x-auto scroll-smooth px-4 md:h-[480px] xl:mx-0 xl:grid xl:h-[540px] xl:grid-cols-5 xl:overflow-visible xl:px-0">
         {columns.map((col, ci) => (
-          <div key={ci} className="flex w-[44%] shrink-0 snap-start flex-col gap-3 lg:w-auto">
+          <div key={ci} className="flex w-[44%] shrink-0 snap-start flex-col gap-3 md:w-[31%] xl:w-auto">
             {col.map((cell, i) => renderCell(cell, `${ci}-${i}`))}
           </div>
         ))}
