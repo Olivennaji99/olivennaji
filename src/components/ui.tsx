@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Icon } from "@/components/icons";
 import { skills, type Skill } from "@/data/site";
 
@@ -56,7 +57,7 @@ export function TechLogo({
 /** Circular spinning text seal with a play button in the middle. */
 export function RotatingBadge({ text, href, id }: { text: string; href: string; id: string }) {
   return (
-    <a
+    <Link
       href={href}
       aria-label={text.replaceAll("•", "").trim().toLowerCase()}
       className="group relative flex h-24 w-24 shrink-0 items-center justify-center"
@@ -72,7 +73,7 @@ export function RotatingBadge({ text, href, id }: { text: string; href: string; 
       <span className="flex h-9 w-9 items-center justify-center rounded-full bg-ink text-bg transition-transform group-hover:scale-110 dark:bg-accent dark:text-accent-ink">
         <Icon name="play" className="ml-0.5 h-4 w-4" />
       </span>
-    </a>
+    </Link>
   );
 }
 

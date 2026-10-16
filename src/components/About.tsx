@@ -1,7 +1,8 @@
+import Link from "next/link";
 import ImageSlot from "@/components/ImageSlot";
 import { Icon } from "@/components/icons";
 import { CenteredHeading, Eyebrow } from "@/components/ui";
-import { about, site, workflow } from "@/data/site";
+import { about, identity, site, to, workflow } from "@/data/site";
 
 export function About() {
   return (
@@ -26,12 +27,12 @@ export function About() {
         </div>
 
         <div className="lg:col-span-7">
-          <Eyebrow>{about.eyebrow}</Eyebrow>
-          <h2 id="about-title" className="mb-4 text-2xl font-extrabold tracking-tight text-ink md:text-4xl lg:text-3xl">
+          <h1 id="about-title" className="mb-4 text-2xl font-extrabold tracking-tight text-ink md:text-4xl lg:text-3xl">
+            <Eyebrow>{about.eyebrow}</Eyebrow>{" "}
             {about.heading}
-          </h2>
+          </h1>
           <p className="mb-6 text-base leading-relaxed text-ink/80 md:text-lg">
-            My name is {site.name}, {about.lead}
+            My name is {identity.fullName} ({identity.nickname}), {about.lead}
           </p>
           {about.paragraphs.map((p, i) => (
             <p key={p.slice(0, 24)} className={`${i === about.paragraphs.length - 1 ? "mb-8" : "mb-6"} text-sm leading-relaxed text-ink/65`}>
@@ -53,13 +54,13 @@ export function About() {
           </dl>
 
           <div className="text-center lg:text-left">
-            <a
-              href="#contact"
+            <Link
+              href={to("contact")}
               className="group inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3.5 text-sm font-bold uppercase tracking-wider text-accent-ink shadow-md transition-all hover:-translate-y-0.5 hover:shadow-lg hover:brightness-110"
             >
               Let&apos;s Work Together
               <Icon name="arrowRight" className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </a>
+            </Link>
           </div>
         </div>
       </div>

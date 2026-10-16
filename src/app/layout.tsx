@@ -1,6 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { JetBrains_Mono, Poppins } from "next/font/google";
-import { brandName, site } from "@/data/site";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import { brandName, identity, site } from "@/data/site";
+import { jsonLd, siteGraph } from "@/lib/seo";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -24,15 +27,16 @@ export const metadata: Metadata = {
   },
   description: site.description,
   keywords: site.keywords,
-  authors: [{ name: site.name, url: site.url }],
-  creator: site.name,
+  authors: [{ name: identity.fullName, url: site.url }],
+  creator: identity.fullName,
+  publisher: brandName,
   applicationName: brandName,
   category: "technology",
   alternates: { canonical: "/" },
+  formatDetection: { telephone: false, email: false, address: false },
   openGraph: {
-    type: "profile",
+    type: "website",
     locale: "en_NG",
-    url: "/",
     siteName: brandName,
     title: site.title,
     description: site.description,
@@ -45,10 +49,10 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
-    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 },
   },
-  // Paste your Google Search Console code here after verifying the domain
-  // verification: { google: "your-code" },
+  // After verifying the site in Google Search Console / Bing Webmaster Tools, paste the codes here:
+  // verification: { google: "your-google-code", other: { "msvalidate.01": "your-bing-code" } },
 };
 
 export const viewport: Viewport = {
@@ -72,7 +76,21 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body className="min-h-dvh overflow-x-hidden font-sans">{children}</body>
+      <body className="min-h-dvh overflow-x-hidden font-sans">
+        {/* Who this site is about; every page adds its own page-level data */}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(siteGraph()) }} />
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-80 focus:rounded-full focus:bg-accent focus:px-4 focus:py-2 focus:text-accent-ink"
+        >
+          Skip to content
+        </a>
+        <Header />
+        <main id="main" tabIndex={-1} className="outline-none">
+          {children}
+        </main>
+        <Footer />
+      </body>
     </html>
   );
 }

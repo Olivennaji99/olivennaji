@@ -1,6 +1,7 @@
+import Link from "next/link";
 import { socialLinks } from "@/components/Contact";
 import { Icon } from "@/components/icons";
-import { footer, site } from "@/data/site";
+import { brandName, footer, site, to } from "@/data/site";
 
 function LinkColumn({ title, links }: { title: string; links: { href: string; label: string }[] }) {
   return (
@@ -12,13 +13,13 @@ function LinkColumn({ title, links }: { title: string; links: { href: string; la
       <ul className="space-y-3">
         {links.map((l) => (
           <li key={l.label}>
-            <a
+            <Link
               href={l.href}
               className="group inline-flex items-center gap-1 text-sm font-medium text-cream/75 transition-all duration-200 hover:translate-x-1 hover:text-panel-soft"
             >
               {l.label}
               <Icon name="chevronRight" className="h-3.5 w-3.5 opacity-0 transition-opacity group-hover:opacity-100" />
-            </a>
+            </Link>
           </li>
         ))}
       </ul>
@@ -46,12 +47,12 @@ export default function Footer() {
       <div className="relative z-10 mx-auto w-full max-w-375 px-4 pb-8 pt-10 md:px-10">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-12 lg:gap-8">
           <div className="flex flex-col space-y-6 lg:col-span-5">
-            <a href="#home" className="inline-flex w-fit items-center gap-3">
+            <Link href="/" className="inline-flex w-fit items-center gap-3">
               <span className="text-3xl font-bold tracking-tight text-white">
                 {site.brand.first}
                 <span className="italic text-panel-soft">{site.brand.second}</span>
               </span>
-            </a>
+            </Link>
             <p className="max-w-md text-sm font-medium leading-relaxed text-cream/80 md:text-base">{footer.blurb}</p>
             <div className="space-y-2">
               <div className="flex items-center gap-2 text-xs font-semibold text-cream/80">
@@ -86,8 +87,8 @@ export default function Footer() {
           </div>
 
           <LinkColumn title="Navigation" links={footer.navigation} />
-          <LinkColumn title="Dev Services" links={footer.services.map((label) => ({ label, href: "#services" }))} />
-          <LinkColumn title="Tech Stack" links={footer.stack.map((label) => ({ label, href: "#tools-and-skills" }))} />
+          <LinkColumn title="Dev Services" links={footer.services.map((label) => ({ label, href: to("services") }))} />
+          <LinkColumn title="Tech Stack" links={footer.stack.map((label) => ({ label, href: to("tools-and-skills") }))} />
         </div>
 
         <div className="mt-14 grid grid-cols-1 gap-4 md:grid-cols-3">
@@ -124,7 +125,7 @@ export default function Footer() {
 
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-cream/15 pt-6 text-sm text-cream/70 md:flex-row">
           <p className="text-xs md:text-sm">
-            © {site.copyrightYear} {site.name}. All rights reserved.
+            © {site.copyrightYear} {site.name} ({brandName}). All rights reserved.
           </p>
           <p className="flex items-center gap-1.5 text-xs italic">
             Crafted with <Icon name="heart" className="h-3.5 w-3.5 text-glow" /> and clean code

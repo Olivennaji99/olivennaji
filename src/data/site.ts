@@ -8,67 +8,144 @@
 
 export const site = {
   // Your public name and brand. The brand shows in the navbar as "first" + accent "second".
-  name: "Your Name",
-  brand: { first: "YourName", second: ".dev" },
-  role: "Full-Stack Developer",
-  location: "Enugu, Nigeria",
+  name: "Olive Nnaji",
+  brand: { first: "Olive", second: "_Code" },
+  role: "Full-Stack Web Developer",
+  location: "Nigeria",
   availability: "Available for projects",
 
   // Your live domain (no trailing slash). Also set NEXT_PUBLIC_SITE_URL on Vercel/Hostinger.
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://your-domain.com",
+  url: (process.env.NEXT_PUBLIC_SITE_URL ?? "https://olive-portfolio-psi.vercel.app").replace(/\/$/, ""),
 
-  // SEO
-  title: "Your Name — Full-Stack Web Developer (Next.js, React, Node.js)",
+  // Default SEO (each page below has its own title and description too)
+  title: "Olive Nnaji — Full-Stack Web Developer | Olive_Code",
   description:
-    "Full-stack web developer in Nigeria building fast, SEO-friendly websites and web apps with Next.js, React, Node.js, Express and MongoDB. Deployed on Vercel and Hostinger.",
+    "Olive Ngozika Nnaji (Ngozi) is a full-stack web developer in Nigeria: frontend and backend. React, Next.js, Node.js and MongoDB websites, dashboards and apps.",
   keywords: [
+    "Olive Nnaji",
+    "Olive Ngozika Nnaji",
+    "Ngozika Nnaji",
+    "Ngozi Nnaji",
+    "Olive",
+    "Ngozi",
+    "Olive_Code",
+    "web developer",
+    "full-stack developer",
+    "fullstack developer",
+    "frontend developer",
+    "front-end developer",
+    "backend developer",
+    "back-end developer",
+    "web developer Nigeria",
     "full-stack developer Nigeria",
-    "Next.js developer",
     "React developer",
+    "Next.js developer",
     "Node.js developer",
-    "Express.js",
-    "MongoDB",
-    "Tailwind CSS",
-    "web developer Enugu",
+    "MongoDB developer",
     "freelance web developer",
-    "Vercel",
-    "Hostinger",
+    "e-commerce developer",
   ],
 
   // Contact
-  email: "hello@your-domain.com",
-  phone: "+234 800 000 0000",
-  whatsapp: "2348000000000", // digits only, with country code
+  email: "olivennaji99@gmail.com",
+  phone: "+234 904 698 4533",
+  whatsapp: "2349046984533", // digits only, with country code
+  // Leave a link as "" to hide it everywhere
   socials: {
-    github: "https://github.com/your-username",
-    linkedin: "https://www.linkedin.com/in/your-username",
-    x: "https://x.com/your-username",
-    instagram: "https://www.instagram.com/your-username",
+    github: "https://github.com/olivennaji99",
+    linkedin: "https://www.linkedin.com/in/olive-nnaji-843ba0331",
+    x: "",
+    instagram: "",
   },
 
-  // Drop your CV at /public/resume.pdf
-  resume: "/resume.pdf",
+  // Your CV (public/documents/)
+  resume: "/documents/OLIVE_NNAJI_CV.pdf",
 
   copyrightYear: 2026,
 };
 
 export const brandName = `${site.brand.first}${site.brand.second}`;
 
+/* ── Who you are, for search engines (structured data) ──
+ * Google uses this to connect every version of your name to you.
+ */
+export const identity = {
+  fullName: "Olive Ngozika Nnaji",
+  givenName: "Olive",
+  additionalName: "Ngozika",
+  familyName: "Nnaji",
+  nickname: "Ngozi",
+  alternateNames: ["Olive Ngozika Nnaji", "Ngozika Nnaji", "Ngozi Nnaji", "Ngozi", "Olive", "Olive_Code"],
+  jobTitles: ["Full-Stack Web Developer", "Web Developer", "Frontend Developer", "Backend Developer"],
+  portrait: "/images/my-pictures/olive-removed background.png",
+  worksFor: { name: "Verbum Networks Limited", role: "Full-Stack Web Developer (Intern)", since: "2025-08" },
+  alumniOf: "Miva Open University",
+  studying: "B.Sc. Software Engineering",
+};
+
 /* ── Pages ──────────────────────────────────────────────
- * The site is one route, but shows one "page" at a time. Each page lists the
- * section ids it contains; a link to any of those ids (e.g. "#process") opens
- * that page. The first id is the page's own link in the navbar.
- * To move a section to another page, also move its component in app/page.tsx.
+ * Each page has its own address, title and description (good for Google).
+ * sections: the ids of the blocks on that page; link to any of them with
+ * to("id"), e.g. to("process") → "/services#process".
  */
 export const pages = [
-  { id: "home", label: "Home", sections: ["home", "work", "showcase"] },
-  { id: "services", label: "Services", sections: ["services", "process"] },
-  { id: "about", label: "About", sections: ["about", "tools-and-skills"] },
-  { id: "projects", label: "Projects", sections: ["projects"] }, // project cards are added below
-  { id: "contact", label: "Contact", sections: ["contact"] },
+  {
+    id: "home",
+    path: "/",
+    label: "Home",
+    sections: ["home", "work", "showcase"],
+    title: "Olive Nnaji — Full-Stack Web Developer | Olive_Code",
+    description:
+      "Olive Ngozika Nnaji (Ngozi) is a full-stack web developer in Nigeria: frontend and backend. React, Next.js, Node.js and MongoDB websites, dashboards and apps.",
+  },
+  {
+    id: "services",
+    path: "/services",
+    label: "Services",
+    sections: ["services", "process"],
+    title: "Frontend & Backend Development Services | Olive Nnaji",
+    description:
+      "Frontend (React, Next.js, Tailwind) and backend (Node.js, Express, MongoDB, REST API) development by Olive Nnaji: websites, dashboards and e-commerce.",
+  },
+  {
+    id: "about",
+    path: "/about",
+    label: "About",
+    sections: ["about", "tools-and-skills"],
+    title: "About Olive Ngozika Nnaji (Ngozi) | Full-Stack Developer",
+    description:
+      "Olive Ngozika Nnaji (Ngozi) is a full-stack web developer at Verbum Networks and a Software Engineering student, skilled in React, Next.js and Node.js.",
+  },
+  {
+    id: "projects",
+    path: "/projects",
+    label: "Projects",
+    sections: ["projects"], // project cards are added at the bottom of this file
+    title: "Web Development Projects by Olive Nnaji | Olive_Code",
+    description:
+      "Projects by full-stack developer Olive Nnaji: NovaShop multi-vendor e-commerce, a hospital management system, business dashboards, websites and a WiFi portal.",
+  },
+  {
+    id: "contact",
+    path: "/contact",
+    label: "Contact",
+    sections: ["contact"],
+    title: "Contact Olive Nnaji | Hire a Full-Stack Web Developer",
+    description:
+      "Hire Olive Nnaji, a full-stack web developer in Nigeria, for websites, web apps, dashboards and e-commerce. Email olivennaji99@gmail.com or send a WhatsApp.",
+  },
 ];
 
-export const nav = pages.map((p) => ({ href: `#${p.id}`, label: p.label }));
+export const pageById = (id: string) => pages.find((p) => p.id === id)!;
+
+/** The address of any section: to("process") → "/services#process", to("about") → "/about". */
+export function to(sectionId: string): string {
+  const page = pages.find((p) => p.sections.includes(sectionId) || p.id === sectionId);
+  if (!page) return `/#${sectionId}`;
+  return page.id === sectionId ? page.path : `${page.path}#${sectionId}`;
+}
+
+export const nav = pages.map((p) => ({ href: p.path, label: p.label }));
 
 /* ── Skills / stack ─────────────────────────────────────
  * logo: file inside /public/tech/
@@ -109,7 +186,7 @@ export const hero = {
     title: "Full-Stack Web Apps",
     text: "Websites, Dashboards & APIs",
     cta: "View Case Study",
-    href: "#projects",
+    href: to("projects"),
   },
 };
 
@@ -117,7 +194,7 @@ export const hero = {
  * icon: one of the names in components/icons.tsx
  */
 export const services = {
-  eyebrow: "My Services",
+  eyebrow: "Frontend · Backend · Full-Stack Services",
   heading: "Building Ideas Into Products",
   groups: [
     {
@@ -145,18 +222,18 @@ export const services = {
 
 /* ── About ──────────────────────────────────────────── */
 export const about = {
-  eyebrow: "About Me",
+  eyebrow: "About Olive Nnaji",
   heading: "Turning ideas into fast, reliable web products.",
   badge: "Full-Stack Developer",
-  lead: "a Full-Stack Developer passionate about turning ideas into fast, reliable web products. I work across the whole stack, from the interface a visitor sees to the API and database behind it.",
+  lead: "a Full-Stack Web Developer who takes products from idea to production, largely self-directed. I work as both a frontend developer (React, Next.js, Tailwind CSS) and a backend developer (Node.js, Express APIs, MongoDB), and I deploy and host what I build in production.",
   paragraphs: [
-    "From landing pages and dashboards to APIs and full web apps, I build with the goal of making every screen fast, accessible and easy to use, and every line of code easy to maintain.",
-    "My philosophy centers on clarity, performance and reliability. Great software should not only look good but also solve real problems and keep working long after launch. I don't just write code, I ship products people use.",
+    "Since August 2025 I've been a Full-Stack Web Developer (intern) at Verbum Networks Limited, where I built and maintain a multi-vendor e-commerce platform with separate admin and seller roles, seller analytics and full admin control. I'm also studying for a B.Sc. in Software Engineering at Miva Open University.",
+    "I close the loop between idea and working product, debug methodically, and ask questions early instead of guessing. I read the documentation first, treat debugging as the interesting part of the job, and explain technical trade-offs, not just outcomes.",
   ],
   stats: [
-    { icon: "briefcase", value: "20+", label: "Projects Shipped" },
-    { icon: "users", value: "15+", label: "Happy Clients" },
-    { icon: "calendar", value: "3+", label: "Years of Experience" },
+    { icon: "briefcase", value: "10+", label: "Projects Built" },
+    { icon: "calendar", value: "1+", label: "Year in Production" },
+    { icon: "layers", value: "13", label: "Core Technologies" },
     { icon: "award", value: "100%", label: "Commitment to Quality" },
   ],
 };
@@ -175,14 +252,25 @@ export const workflow = {
   ],
 };
 
-/* ── Showcase strip ─────────────────────────────────────
- * Files: /public/images/showcase/1.(webp|png|jpg) … 7
+/* ── Showcase gallery (home page) ───────────────────────
+ * Seven tiles, in order: column 1 (top, bottom), column 2 (tall), column 3,
+ * column 4 (tall), column 5 (top, bottom). Tall tiles suit phone screenshots.
+ * src: path inside /public without the extension. position: which part to keep when cropped.
  */
 export const showcase = {
   heading: "Bring Your Ideas To Life With Clean Code",
   badge: "LEARN ABOUT MY STORY • SEE HOW I BUILD • ",
   clients: ["AO", "CE", "TK"],
-  cta: { label: "View My Work", href: "#projects" },
+  cta: { label: "View My Work", href: to("projects") },
+  images: [
+    { src: "images/projects/images/ecommerce-mobile", alt: "NovaShop e-commerce storefront on mobile", position: "object-top" },
+    { src: "images/projects/images/hospital-management-system-screenshot", alt: "Hospital management system admin dashboard", position: "object-left-top" },
+    { src: "images/projects/images/mater-christi-hero-mobile-hd", alt: "Mater Christi Centre website on mobile", position: "object-top" },
+    { src: "images/projects/images/mater-christi-mobile-hd", alt: "Mater Christi Centre \"Nurturing Mind and Spirit\" section on mobile", position: "object-top" },
+    { src: "images/projects/images/staff-panel-mobile-hd", alt: "Staff Panel dashboard on mobile", position: "object-top" },
+    { src: "images/projects/images/staff-panel-screenshot", alt: "Staff Panel dashboard overview", position: "object-left-top" },
+    { src: "images/projects/images/ecommerce-desktop", alt: "NovaShop e-commerce storefront on desktop", position: "object-left-top" },
+  ],
 };
 
 /* ── Tools & skills marquee ─────────────────────────── */
@@ -193,81 +281,90 @@ export const toolsSection = {
 };
 
 /* ── Projects ───────────────────────────────────────────
- * image: file name inside /public/images/projects/ (any of .webp .png .jpg)
+ * image: path inside /public/images/projects/ without the extension
+ * position: which part of the screenshot to keep when it is cropped
  * live / repo: leave "" to hide the link
  */
 export const projectsSection = {
-  eyebrow: "Curated Builds • Shipped End to End",
+  eyebrow: "Projects by Olive Nnaji • Shipped End to End",
   heading: "Explore My Project Library",
-  intro: "A collection of my best work: real products for healthcare, education, business and nonprofits.",
+  intro: "Real products for real users: a multi-vendor marketplace, healthcare and business dashboards, a church website, and a hospital WiFi portal.",
   cta: { label: "Access Full Library", href: site.socials.github },
 };
 
-export const projects = [
+export const projects: {
+  slug: string;
+  title: string;
+  type: string;
+  featured?: boolean;
+  text: string;
+  stack: string[];
+  image: string;
+  position: string;
+  live: string;
+  repo: string;
+}[] = [
+  {
+    slug: "multi-vendor-ecommerce",
+    title: "NovaShop — Multi-Vendor E-Commerce Platform",
+    type: "Featured · E-Commerce",
+    featured: true, // shown as a wide card
+    text: "A production-ready marketplace with three roles. Admins approve and manage sellers, sellers run their own store with sales analytics, and customers shop, track orders and save wishlists. It pairs a Next.js storefront and dashboards with a standalone Express REST API on MongoDB, using role-based NextAuth sessions.",
+    stack: ["Next.js 16", "TypeScript", "Express", "MongoDB", "NextAuth"],
+    image: "images/ecommerce-desktop",
+    position: "object-left-top",
+    live: "",
+    repo: "https://github.com/olivennaji99/multi-vendor-ecommerce",
+  },
   {
     slug: "hospital-management",
     title: "Hospital Management System",
     type: "Web App",
-    text: "Patient records, appointments, billing and staff roles for healthcare facilities in one secure dashboard.",
-    stack: ["Next.js", "TypeScript", "MongoDB", "Tailwind"],
-    image: "hospital",
+    text: "Role-based hospital dashboard covering patients, users, inventory, stock control, pharmacy finance, beds, HMOs, families, messaging, audit logs and analytics.",
+    stack: ["Next.js", "TypeScript", "MongoDB"],
+    image: "images/hospital-management-system-screenshot",
+    position: "object-left-top",
     live: "",
     repo: "",
   },
   {
-    slug: "school-fees-platform",
-    title: "School Fees Payment Platform",
-    type: "Platform",
-    text: "Centralised fee collection for multiple schools with reserved account numbers, USSD and automatic receipts.",
-    stack: ["Node.js", "Express", "MongoDB", "React"],
-    image: "school-fees",
+    slug: "staff-panel",
+    title: "Staff Panel — Operations Dashboard",
+    type: "Dashboard",
+    text: "An internal dashboard for running a tech business: web and networking departments, academy students, café sales, accounts, staff documents, clients, and monthly income and expenses.",
+    stack: ["React", "Node.js", "MongoDB"],
+    image: "images/staff-panel-screenshot",
+    position: "object-left-top",
     live: "",
     repo: "",
   },
   {
-    slug: "assembly-companion-pwa",
-    title: "Assembly Companion PWA",
-    type: "PWA",
-    text: "An installable progressive web app giving delegates schedules, documents and updates for a continental gathering.",
-    stack: ["Next.js", "PWA", "Tailwind"],
-    image: "assembly-pwa",
-    live: "",
-    repo: "",
-  },
-  {
-    slug: "company-website",
-    title: "Tech Company Website",
+    slug: "mater-christi-centre",
+    title: "Mater Christi Centre Website",
     type: "Website",
-    text: "Corporate site with a CMS-backed blog, contact pipeline and automated CI/CD to a VPS.",
-    stack: ["Next.js", "MongoDB", "Hostinger VPS"],
-    image: "company-site",
-    live: "",
-    repo: "",
-  },
-  {
-    slug: "communication-platform",
-    title: "Institutional Communication Platform",
-    type: "Web App",
-    text: "Announcements with mandatory read receipts so management knows exactly who has seen each memo.",
-    stack: ["React", "Express", "MongoDB"],
-    image: "communication",
-    live: "",
-    repo: "",
-  },
-  {
-    slug: "nonprofit-website",
-    title: "Nonprofit Website Redesign",
-    type: "Website",
-    text: "A multi-page redesign for a charity, focused on clear storytelling, donations and volunteer sign-ups.",
+    text: "A responsive website for a church and spiritual formation centre, presenting its mission, apostolate, gallery and contact details with a warm, elegant design.",
     stack: ["HTML", "CSS", "JavaScript"],
-    image: "nonprofit",
-    live: "",
+    image: "images/mater-christi-hero-desktop",
+    position: "object-left",
+    live: "https://materchristicentre.com/",
     repo: "",
+  },
+  {
+    slug: "hospital-wifi-portal",
+    title: "St Catherine Hospital WiFi Portal",
+    type: "Client · Networking",
+    text: "A branded captive portal for a hospital's free patient and visitor WiFi, running on MikroTik routers. It handles secure CHAP (MD5) login, error states, status and logout pages, and is mobile-first for guests on their phones. Delivered with Verbum Networks.",
+    stack: ["HTML", "CSS", "JavaScript", "MikroTik"],
+    image: "images/hotspot-portal",
+    position: "object-center",
+    live: "",
+    repo: "https://github.com/olivennaji99/Mikro-tik-",
   },
 ];
 
 /* ── Contact ────────────────────────────────────────── */
 export const contact = {
+  eyebrow: "Hire a Full-Stack Web Developer",
   intro:
     "Have a project in mind or want to collaborate? I'd love to hear from you. Let's build something great together.",
   formIntro: "Have a question, a project in mind, or need help choosing the right stack? Feel free to reach out.",
@@ -277,14 +374,14 @@ export const contact = {
 /* ── Footer ─────────────────────────────────────────── */
 export const footer = {
   blurb:
-    "Full-stack developer building fast, SEO-friendly websites and web apps. From landing pages and dashboards to APIs and complete products, I turn ideas into reliable, production-ready software.",
+    "Olive Ngozika Nnaji (Ngozi) is a full-stack web developer, frontend and backend, building fast, SEO-friendly websites and web apps. From landing pages and dashboards to APIs and complete e-commerce products, I turn ideas into reliable, production-ready software.",
   navigation: [
-    { href: "#home", label: "Home" },
-    { href: "#about", label: "About Me" },
-    { href: "#process", label: "My Process" },
-    { href: "#work", label: "Featured Work" },
-    { href: "#projects", label: "Projects" },
-    { href: "#contact", label: "Contact Me" },
+    { href: to("home"), label: "Home" },
+    { href: to("about"), label: "About Me" },
+    { href: to("process"), label: "My Process" },
+    { href: to("work"), label: "Featured Work" },
+    { href: to("projects"), label: "Projects" },
+    { href: to("contact"), label: "Contact Me" },
   ],
   services: ["Responsive Websites", "React Interfaces", "REST APIs", "Next.js Web Apps", "Database Design", "Deployment & SEO"],
   stack: ["React.js", "Next.js", "Node.js & Express", "MongoDB", "Tailwind CSS"],
@@ -302,8 +399,3 @@ export const footer = {
 /* ── Page lookup (no need to edit) ──────────────────── */
 // Links to a project card (#hospital-management) open the Projects page
 pages.find((p) => p.id === "projects")?.sections.push(...projects.map((p) => p.slug));
-
-/** Section id → the page that contains it */
-export const sectionPage: Record<string, string> = Object.fromEntries(
-  pages.flatMap((p) => p.sections.map((s) => [s, p.id])),
-);

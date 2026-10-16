@@ -1,12 +1,13 @@
+import Link from "next/link";
 import { Icon } from "@/components/icons";
-import { services } from "@/data/site";
+import { services, to } from "@/data/site";
 
 function ViewAll({ className }: { className: string }) {
   return (
-    <a href="#contact" className={`group items-center gap-2 text-sm font-semibold text-accent transition-colors hover:text-ink ${className}`}>
+    <Link href={to("contact")} className={`group items-center gap-2 text-sm font-semibold text-accent transition-colors hover:text-ink ${className}`}>
       View All Services
       <Icon name="arrowRight" className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-    </a>
+    </Link>
   );
 }
 
@@ -19,10 +20,10 @@ export default function Services() {
     >
       <div className="mb-8 flex items-end justify-between gap-4">
         <div>
-          <p className="mb-2 text-[11px] font-medium uppercase tracking-[0.2em] text-accent">{services.eyebrow}</p>
-          <h2 id="services-title" className="text-3xl font-bold tracking-tight text-ink md:text-4xl">
+          <h1 id="services-title" className="text-3xl font-bold tracking-tight text-ink md:text-4xl">
+            <span className="mb-2 block text-[11px] font-medium uppercase tracking-[0.2em] text-accent">{services.eyebrow}</span>{" "}
             {services.heading}
-          </h2>
+          </h1>
         </div>
         <ViewAll className="hidden shrink-0 sm:inline-flex" />
       </div>

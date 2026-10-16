@@ -1,18 +1,19 @@
 "use client";
 
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useLayoutEffect, useState } from "react";
 import { Icon } from "@/components/icons";
-import { usePage } from "@/components/Pages";
-import { nav, site } from "@/data/site";
+import { nav, site, to } from "@/data/site";
 
 function Brand() {
   return (
-    <a href="#home" className="group inline-flex items-center gap-2.5">
+    <Link href="/" aria-label={`${site.brand.first}${site.brand.second}: ${site.name}, home`} className="group inline-flex items-center gap-2.5">
       <span className="text-lg font-bold tracking-tight text-ink sm:pl-2 sm:text-xl">
         {site.brand.first}
         <span className="text-accent">{site.brand.second}</span>
       </span>
-    </a>
+    </Link>
   );
 }
 
@@ -47,7 +48,7 @@ function ThemeToggle() {
 
 export default function Header() {
   const [open, setOpen] = useState(false);
-  const active = `#${usePage().active}`;
+  const active = usePathname();
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -58,7 +59,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-6 sm:pt-4">
+      <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-6 sm:pt-4" style={{ viewTransitionName: "site-header" }}>
         <div className="mx-auto flex h-13 max-w-5xl items-center justify-between rounded-full border border-accent/10 bg-surface/70 px-4 shadow-sm backdrop-blur-xl transition-all duration-300 sm:px-2 dark:border-white/10 dark:bg-surface/60">
           <Brand />
 
@@ -66,10 +67,10 @@ export default function Header() {
             {nav.map((item) => {
               const isActive = active === item.href;
               return (
-                <a
+                <Link
                   key={item.href}
                   href={item.href}
-                  aria-current={isActive ? "true" : undefined}
+                  aria-current={isActive ? "page" : undefined}
                   className={`relative rounded-full px-4 py-2 text-sm font-medium transition-colors ${
                     isActive ? "bg-accent/10 text-accent dark:bg-accent/15" : "text-ink/70 hover:bg-accent/5 hover:text-accent"
                   }`}
@@ -78,22 +79,22 @@ export default function Header() {
                   {isActive ? (
                     <span className="absolute -bottom-0.5 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-accent" />
                   ) : null}
-                </a>
+                </Link>
               );
             })}
           </nav>
 
           <div className="flex items-center gap-1 sm:gap-2">
             <ThemeToggle />
-            <a
-              href="#contact"
+            <Link
+              href={to("contact")}
               className="group hidden items-center gap-2 rounded-full bg-linear-to-r from-accent to-accent-2 py-2 pl-5 pr-3 text-sm font-semibold text-accent-ink shadow-md shadow-accent/30 transition-all hover:shadow-lg hover:shadow-accent/40 active:scale-95 sm:inline-flex"
             >
               Hire Me
               <span className="flex h-6 w-6 items-center justify-center rounded-full bg-white/25 transition-transform group-hover:translate-x-0.5">
                 <Icon name="arrowRight" className="h-3.5 w-3.5" />
               </span>
-            </a>
+            </Link>
             <button
               type="button"
               aria-label="Open navigation menu"
@@ -144,27 +145,28 @@ export default function Header() {
             </div>
             <nav className="flex flex-col gap-2">
               {nav.map((item) => (
-                <a
+                <Link
                   key={item.href}
                   href={item.href}
+                  aria-current={active === item.href ? "page" : undefined}
                   onClick={() => setOpen(false)}
                   className={`rounded-full px-5 py-3 text-lg font-semibold transition-colors ${
                     active === item.href ? "bg-accent text-accent-ink" : "text-ink hover:bg-accent/10"
                   }`}
                 >
                   {item.label}
-                </a>
+                </Link>
               ))}
             </nav>
           </div>
           <div className="relative pt-8">
-            <a
-              href="#contact"
+            <Link
+              href={to("contact")}
               onClick={() => setOpen(false)}
               className="flex w-full items-center justify-center gap-2 rounded-full bg-linear-to-r from-accent to-accent-2 py-3.5 text-base font-semibold text-accent-ink shadow-lg shadow-accent/30 transition-transform active:scale-95"
             >
               Hire Me <Icon name="arrowRight" className="h-4 w-4" />
-            </a>
+            </Link>
           </div>
         </div>
       </aside>

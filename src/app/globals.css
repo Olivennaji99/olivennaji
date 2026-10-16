@@ -95,23 +95,33 @@
   50% { translate: 0 -8px; }
 }
 
-@keyframes page-in {
-  from { opacity: 0; transform: translateY(18px); }
-  to { opacity: 1; transform: none; }
+/* Page transitions (components/PageTransition.tsx, React <ViewTransition>):
+   old page fades up and out quickly, new page fades up and in. */
+@keyframes page-fade-out {
+  to { opacity: 0; transform: translateY(-10px); }
 }
-@keyframes page-out {
-  to { opacity: 0; transform: translateY(-12px); }
+@keyframes page-fade-in {
+  from { opacity: 0; transform: translateY(16px); }
 }
-
-/* Page switching (components/Pages.tsx). Without JS the attribute is never set,
-   so every page shows as one long scroll. The rule that reveals the active page
-   is generated from the page list in app/page.tsx. */
-html[data-page-active] [data-page] {
+::view-transition-old(.page-exit) {
+  animation: page-fade-out 200ms ease-in both;
+}
+::view-transition-new(.page-enter) {
+  animation: page-fade-in 420ms cubic-bezier(0.22, 1, 0.36, 1) 120ms both;
+}
+/* Keep the header still while pages change, and keep the page clickable */
+::view-transition-group(site-header) {
+  animation: none;
+  z-index: 100;
+}
+::view-transition-old(site-header) {
   display: none;
-  animation: page-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
-html[data-page-phase="out"] [data-page] {
-  animation: page-out 0.26s ease-in forwards;
+::view-transition-new(site-header) {
+  animation: none;
+}
+::view-transition {
+  pointer-events: none;
 }
 
 html {
@@ -147,6 +157,12 @@ h1, h2, h3 {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;

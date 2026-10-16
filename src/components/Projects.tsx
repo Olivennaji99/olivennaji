@@ -10,32 +10,31 @@ export default function Projects() {
       className="mx-auto w-full max-w-375 scroll-mt-28 px-4 pb-6 pt-8 lg:px-8 lg:pt-12"
     >
       <div className="mb-12 text-center md:mb-16">
-        <span className="mb-3 block text-xs font-bold uppercase tracking-[0.3em] text-accent md:text-sm">
-          {projectsSection.eyebrow}
-        </span>
-        <h2 id="projects-title" className="mb-3 text-3xl font-black uppercase tracking-tighter text-ink md:text-5xl">
+        <h1 id="projects-title" className="mb-3 text-3xl font-black uppercase tracking-tighter text-ink md:text-5xl">
+          <span className="mb-3 block text-xs font-bold tracking-[0.3em] text-accent md:text-sm">{projectsSection.eyebrow}</span>{" "}
           {projectsSection.heading}
-        </h2>
+        </h1>
         <p className="mx-auto max-w-3xl text-base leading-relaxed text-ink/70 md:text-xl">{projectsSection.intro}</p>
       </div>
 
       <ul className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
         {projects.map((p) => {
-          const link = p.live || p.repo;
           return (
-            <li key={p.slug}>
+            <li key={p.slug} className={p.featured ? "md:col-span-2" : undefined}>
               <article
                 id={p.slug}
-                className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-accent/15 bg-surface shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-accent/15 dark:border-white/10"
+                className={`group relative flex h-full flex-col overflow-hidden rounded-2xl border border-accent/15 bg-surface shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-accent/15 dark:border-white/10 ${
+                  p.featured ? "lg:flex-row" : ""
+                }`}
               >
-                <div className="relative aspect-video overflow-hidden">
+                <div className={`relative aspect-video overflow-hidden ${p.featured ? "lg:aspect-auto lg:min-h-80 lg:w-[58%] lg:shrink-0" : ""}`}>
                   <ImageSlot
                     base={`images/projects/${p.image}`}
                     alt={`${p.title} screenshot`}
                     hint="cover · 1280 × 720"
-                    sizes="(min-width: 1024px) 30vw, (min-width: 768px) 45vw, 92vw"
+                    sizes={p.featured ? "(min-width: 1024px) 38vw, (min-width: 768px) 92vw, 92vw" : "(min-width: 1024px) 30vw, (min-width: 768px) 45vw, 92vw"}
                     className="h-full w-full"
-                    imgClassName="object-cover transition-transform duration-700 group-hover:scale-110"
+                    imgClassName={`object-cover ${p.position} transition-transform duration-700 group-hover:scale-110`}
                   />
                   <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
                     <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/20 bg-[#0d1424]/80 text-panel-soft shadow-2xl backdrop-blur-md transition-transform duration-300 group-hover:scale-110 dark:bg-black/70">
@@ -47,30 +46,40 @@ export default function Projects() {
                   </div>
                 </div>
 
-                <div className="flex flex-1 flex-col justify-between p-6">
+                <div className="flex min-w-0 flex-1 flex-col justify-between p-6">
                   <div>
                     <h3 className="mb-2 text-lg font-bold leading-snug text-ink transition-colors group-hover:text-accent">
                       {p.title}
                     </h3>
-                    <p className="mb-4 line-clamp-2 text-sm leading-relaxed text-ink/65">{p.text}</p>
+                    <p className={`mb-4 text-sm leading-relaxed text-ink/65 ${p.featured ? "" : "line-clamp-2"}`}>{p.text}</p>
                   </div>
                   <div className="flex items-center justify-between gap-3 border-t border-accent/10 pt-4 dark:border-white/10">
                     <div className="flex min-w-0 items-center gap-1.5 text-accent">
                       <Icon name="terminal" className="h-4 w-4 shrink-0" />
-                      <span className="truncate text-xs font-semibold">{p.stack.slice(0, 3).join(" · ")}</span>
+                      <span className="truncate text-xs font-semibold">{p.stack.slice(0, p.featured ? 5 : 3).join(" · ")}</span>
                     </div>
-                    {link ? (
-                      <a
-                        href={link}
-                        target="_blank"
-                        rel="noopener"
-                        className="inline-flex shrink-0 items-center gap-1 text-xs font-bold uppercase tracking-tight text-accent transition-colors hover:text-ink hover:underline"
-                      >
-                        {p.live ? "Live Site" : "Source"}
-                        <Icon name="arrowUpRight" className="h-3.5 w-3.5" />
-                      </a>
+                    {p.live || p.repo ? (
+                      <div className="flex shrink-0 items-center gap-3">
+                        {[
+                          { href: p.live, label: "Live Site" },
+                          { href: p.repo, label: "Source" },
+                        ]
+                          .filter((l) => l.href)
+                          .map((l) => (
+                            <a
+                              key={l.label}
+                              href={l.href}
+                              target="_blank"
+                              rel="noopener"
+                              className="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-tight text-accent transition-colors hover:text-ink hover:underline"
+                            >
+                              {l.label}
+                              <Icon name="arrowUpRight" className="h-3.5 w-3.5" />
+                            </a>
+                          ))}
+                      </div>
                     ) : (
-                      <span className="shrink-0 text-xs font-bold uppercase tracking-tight text-ink/50">Case study soon</span>
+                      <span className="shrink-0 text-xs font-bold uppercase tracking-tight text-ink/50">Private project</span>
                     )}
                   </div>
                 </div>

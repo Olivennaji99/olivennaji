@@ -1,3 +1,4 @@
+import Link from "next/link";
 import ImageSlot from "@/components/ImageSlot";
 import { Icon } from "@/components/icons";
 import { TechLogo, findSkill } from "@/components/ui";
@@ -34,15 +35,11 @@ export default function Hero() {
         <div className="relative lg:h-[640px]">
           {/* Headline: split left / right on desktop */}
           <div className="relative z-10 flex animate-rise flex-col gap-2 sm:px-10 lg:absolute lg:inset-x-0 lg:top-0 lg:flex-row lg:justify-between lg:gap-0">
-            <h1 id="hero-title" className="leading-none">
+            <p className="leading-none">
               <span className={lead}>{hero.left.lead}</span>
               <span className={big}>{hero.left.accent}</span>
-              <span className="sr-only">
-                {" "}
-                {hero.right.lead} {hero.right.accent}. {site.name}, {site.role}.
-              </span>
-            </h1>
-            <p className="leading-none lg:text-right" aria-hidden="true">
+            </p>
+            <p className="leading-none lg:text-right">
               <span className={lead}>{hero.right.lead}</span>
               <span className={big}>{hero.right.accent}</span>
             </p>
@@ -57,7 +54,7 @@ export default function Hero() {
                   alt={`${site.name}, ${site.role}`}
                   hint="transparent PNG · 1024 × 1536"
                   sizes="(min-width: 1024px) 460px, 350px"
-                  priority
+                  preload
                   className="h-full w-full lg:rounded-b-4xl"
                   imgClassName="object-cover object-top"
                 />
@@ -94,7 +91,11 @@ export default function Hero() {
                     </span>
                     {site.availability}
                   </p>
-                  <h2 className="mt-4 text-3xl font-bold leading-tight sm:text-4xl lg:text-[2.1rem] xl:text-[2.4rem]">
+                  {/* The page's main heading: who you are, for visitors and search engines */}
+                  <h1 id="hero-title" className="mt-3 text-sm font-semibold text-white sm:text-base">
+                    Hi, I&apos;m {site.name} <span className="font-normal text-white/80">— {site.role}</span>
+                  </h1>
+                  <h2 className="mt-3 text-3xl font-bold leading-tight sm:text-4xl lg:text-[2.1rem] xl:text-[2.4rem]">
                     {hero.headline}
                   </h2>
                   <p className="mt-4 max-w-[17rem] text-[15px] leading-relaxed text-white/80">{hero.intro}</p>
@@ -137,12 +138,12 @@ export default function Hero() {
                     />
                     <p className="mt-3 text-center text-sm font-bold">{hero.featured.title}</p>
                     <p className="text-center text-[11px] text-white/80">{hero.featured.text}</p>
-                    <a
+                    <Link
                       href={hero.featured.href}
                       className="mx-auto mb-1 mt-2 flex w-fit items-center rounded-full bg-cream px-5 py-2 text-xs font-bold text-[#2f55f4] transition-transform hover:scale-105 active:scale-95 dark:text-[#142052]"
                     >
                       {hero.featured.cta}
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>

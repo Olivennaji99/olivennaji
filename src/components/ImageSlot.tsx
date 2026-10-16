@@ -23,7 +23,10 @@ type Props = {
   /** Size hint shown on the placeholder, e.g. "1000 × 1250" */
   hint?: string;
   sizes?: string;
-  priority?: boolean;
+  /** Load in <head> — only for the main above-the-fold image */
+  preload?: boolean;
+  /** 1–100; must be listed in images.qualities in next.config.ts */
+  quality?: number;
   className?: string;
   imgClassName?: string;
 };
@@ -33,7 +36,8 @@ export default function ImageSlot({
   alt,
   hint,
   sizes = "100vw",
-  priority = false,
+  preload = false,
+  quality = 90,
   className = "",
   imgClassName = "object-cover",
 }: Props) {
@@ -42,7 +46,7 @@ export default function ImageSlot({
   return (
     <div className={`relative overflow-hidden ${className}`}>
       {src ? (
-        <Image src={src} alt={alt} fill sizes={sizes} priority={priority} className={imgClassName} />
+        <Image src={src} alt={alt} fill sizes={sizes} preload={preload} quality={quality} className={imgClassName} />
       ) : (
         <div
           role="img"

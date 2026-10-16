@@ -21,14 +21,16 @@ Open **`src/data/site.ts`**. Every word on the site lives there: name, role, con
 
 Each image slot shows a striped placeholder with the exact file path it expects. Drop a file with that name into `public/` and rebuild. `.webp`, `.png`, `.jpg`, `.jpeg` and `.avif` all work.
 
-| Slot | File | Suggested size |
-| --- | --- | --- |
-| Hero portrait (center of the hero, transparent background) | `public/images/hero-portrait.png` | 920 × 1280 |
-| Featured work (laptop mockup in the hero card) | `public/images/featured-work.webp` | 1000 × 600 |
-| About portrait | `public/images/about-portrait.webp` | 900 × 1125 |
-| Showcase gallery | `public/images/showcase/1.webp` … `7.webp` | 800 × 1000 |
-| Project covers | `public/images/projects/<image>.webp` (name set per project in `site.ts`) | 1280 × 720 |
-| Resume | `public/resume.pdf` | — |
+| Slot | File |
+| --- | --- |
+| Hero portrait (transparent background) | `public/images/my-pictures/olive-removed background.png` |
+| Hero "Full-Stack Web Apps" card | `public/images/my-pictures/olive-coding.png` |
+| About portrait (transparent background) | `public/images/my-pictures/olive-color-block-removed background.png` |
+| Home gallery (7 tiles) | set in `showcase.images` in `site.ts` |
+| Project covers | `public/images/projects/images/…`, set per project in `site.ts` |
+| CV ("View My Resume") | `public/documents/OLIVE_NNAJI_CV.pdf` |
+
+To swap a picture, drop the new file in the same folder and update its path in `src/data/site.ts` (or the component named above).
 
 Tech logos live in `public/tech/` (SVG). To add a technology, drop its SVG there and add an entry to `skills` in `site.ts`.
 
@@ -46,6 +48,23 @@ After deploying:
 1. Set `NEXT_PUBLIC_SITE_URL` to your real domain (see `.env.example`).
 2. Verify the domain in Google Search Console, paste the code into `verification` in `layout.tsx`, and submit `https://your-domain.com/sitemap.xml`.
 3. Update `LAST_UPDATED` in `src/app/sitemap.ts` when you change content.
+
+## Contact form email
+
+Messages from the contact form are sent to your inbox through your own Gmail account, with **Reply-To** set to the visitor so you can answer by pressing Reply. It takes about two minutes to set up:
+
+1. Turn on **2-Step Verification** for your Google account: <https://myaccount.google.com/security>
+2. Create an **App Password**: <https://myaccount.google.com/apppasswords> → name it "Portfolio" → copy the 16-character password.
+3. Add two environment variables:
+   - **Locally:** create a file named `.env.local` in the project folder containing
+     ```
+     GMAIL_USER=olivennaji99@gmail.com
+     GMAIL_APP_PASSWORD=abcd efgh ijkl mnop
+     ```
+   - **On Vercel:** Project → Settings → Environment Variables → add the same two, then redeploy.
+4. Send yourself a test message from the site.
+
+Never commit `.env.local` (it is already git-ignored), and never use your normal Gmail password here. If the variables are missing, the form tells visitors to email you directly instead.
 
 ## Deploy
 

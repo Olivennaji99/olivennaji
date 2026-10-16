@@ -1,7 +1,8 @@
+import Link from "next/link";
 import ImageSlot from "@/components/ImageSlot";
 import { Icon } from "@/components/icons";
 import { ClientStack, RotatingBadge } from "@/components/ui";
-import { showcase } from "@/data/site";
+import { showcase, to } from "@/data/site";
 
 // Each column is a stack of cells; `grow` sets the height share (as in the reference).
 type Cell =
@@ -20,7 +21,8 @@ const columns: Cell[][] = [
 
 function renderCell(cell: Cell, key: string) {
   switch (cell.kind) {
-    case "img":
+    case "img": {
+      const img = showcase.images[cell.n - 1];
       return (
         <div
           key={key}
@@ -28,15 +30,16 @@ function renderCell(cell: Cell, key: string) {
           style={{ flex: cell.grow }}
         >
           <ImageSlot
-            base={`images/showcase/${cell.n}`}
-            alt={`Screenshot ${cell.n} from a recent web project`}
+            base={img?.src ?? `images/showcase/${cell.n}`}
+            alt={img?.alt ?? `Screenshot ${cell.n} from a recent web project`}
             hint="800 × 1000"
             sizes="(min-width: 1024px) 20vw, 44vw"
             className="h-full w-full bg-soft"
-            imgClassName="object-cover transition-transform duration-700 group-hover:scale-105"
+            imgClassName={`object-cover ${img?.position ?? ""} transition-transform duration-700 group-hover:scale-105`}
           />
         </div>
       );
+    }
     case "gap":
       return <div key={key} style={{ flex: cell.grow }} />;
     case "dot":
@@ -49,7 +52,7 @@ function renderCell(cell: Cell, key: string) {
       );
     case "cta":
       return (
-        <a
+        <Link
           key={key}
           href={showcase.cta.href}
           className="flex items-center justify-center gap-2 rounded-full bg-ink px-4 text-sm font-bold text-bg transition-transform hover:scale-[1.03] active:scale-95 sm:text-xl dark:bg-cream dark:text-[#0d1424]"
@@ -57,7 +60,7 @@ function renderCell(cell: Cell, key: string) {
         >
           {showcase.cta.label}
           <Icon name="arrowUpRight" className="h-5 w-5" />
-        </a>
+        </Link>
       );
   }
 }
@@ -66,13 +69,13 @@ export default function Showcase() {
   return (
     <section id="showcase" aria-labelledby="showcase-title" className="mx-auto w-full max-w-375 scroll-mt-28 px-4 py-14 lg:px-8 lg:py-20">
       <div className="mb-6 flex items-center justify-between lg:hidden">
-        <RotatingBadge text={showcase.badge} href="#about" id="badge-path-sm" />
+        <RotatingBadge text={showcase.badge} href={to("about")} id="badge-path-sm" />
         <ClientStack initials={showcase.clients} />
       </div>
 
       <div className="relative mb-8 lg:mb-10">
         <div className="absolute left-0 top-0 hidden lg:block">
-          <RotatingBadge text={showcase.badge} href="#about" id="badge-path-lg" />
+          <RotatingBadge text={showcase.badge} href={to("about")} id="badge-path-lg" />
         </div>
         <div className="absolute right-0 top-3 hidden lg:block">
           <ClientStack initials={showcase.clients} />

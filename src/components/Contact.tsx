@@ -7,8 +7,8 @@ export const socialLinks = [
   { label: "LinkedIn", href: site.socials.linkedin, icon: <LinkedInLogo /> },
   { label: "X / Twitter", href: site.socials.x, icon: <XLogo /> },
   { label: "Instagram", href: site.socials.instagram, icon: <InstagramLogo /> },
-  { label: "WhatsApp", href: `https://wa.me/${site.whatsapp}`, icon: <WhatsAppLogo /> },
-];
+  { label: "WhatsApp", href: site.whatsapp ? `https://wa.me/${site.whatsapp}` : "", icon: <WhatsAppLogo /> },
+].filter((s) => s.href); // links left empty in site.ts are hidden
 
 export default function Contact() {
   const tel = site.phone.replace(/\s+/g, "");
@@ -21,9 +21,10 @@ export default function Contact() {
   return (
     <section id="contact" aria-labelledby="contact-title" className="relative w-full scroll-mt-28 overflow-hidden pt-8 lg:pt-12">
       <div className="mx-auto w-full max-w-375 px-4 lg:px-8">
-        <h2 id="contact-title" className="text-center text-3xl font-extrabold tracking-tight text-ink sm:text-4xl md:text-5xl">
+        <h1 id="contact-title" className="text-center text-3xl font-extrabold tracking-tight text-ink sm:text-4xl md:text-5xl">
+          <span className="mb-2 block text-xs font-bold uppercase tracking-[0.25em] text-accent">{contact.eyebrow}</span>{" "}
           Contact <span className="text-accent">Me</span>
-        </h2>
+        </h1>
         <p className="mx-auto mt-3 max-w-2xl text-center text-xs leading-relaxed text-ink/80 sm:text-sm md:text-base">
           {contact.intro}
         </p>
@@ -32,7 +33,7 @@ export default function Contact() {
           <div className="rounded-2xl border border-accent/15 bg-surface p-3.5 shadow-[0_10px_40px_-12px_rgba(47,85,244,0.25)] sm:rounded-4xl sm:p-8 lg:p-10 dark:border-white/10">
             <h3 className="text-lg font-bold text-ink sm:text-xl lg:text-2xl">Send me a message</h3>
             <p className="mt-1 max-w-md text-xs leading-relaxed text-ink/70 sm:text-sm">{contact.formIntro}</p>
-            <ContactForm email={site.email} />
+            <ContactForm />
           </div>
 
           <aside className="relative overflow-hidden rounded-2xl bg-panel p-4 text-panel-ink transition-colors duration-500 sm:rounded-4xl sm:p-8">
