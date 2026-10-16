@@ -1,0 +1,156 @@
+@import "tailwindcss";
+
+/* Theme is set on <html data-theme="light|dark"> by the inline script in layout.tsx
+   (saved choice, else system preference). `dark:` targets that attribute. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* Palette: cobalt for action, deep navy ink, amber for highlights. */
+:root {
+  --bg: #f2f4f8;
+  --surface: #ffffff;
+  --ink: #0d1424;
+  --accent: #2f55f4; /* primary: links, buttons, headline accents */
+  --accent-ink: #ffffff; /* text on accent */
+  --accent-2: #7d95ff; /* gradient partner of accent */
+  --soft: #dce4ff; /* tinted fills (icon tiles, avatars) */
+  --panel: #2f55f4; /* big colored panels: hero card, contact aside, footer */
+  --panel-ink: #ffffff;
+  --panel-soft: #c9d5ff; /* light accent on panels */
+  --cream: #eef1f7; /* light buttons on panels */
+  --glow: #ffb21e;
+}
+
+/* No-JS fallback: follow the system */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #090e1a;
+    --surface: #111829;
+    --ink: #e9edf5;
+    --accent: #6d88ff;
+    --accent-ink: #070b16;
+    --accent-2: #a9b9ff;
+    --soft: #1b2645;
+    --panel: #142052;
+    --panel-ink: #ffffff;
+    --panel-soft: #a9b9ff;
+    --cream: #eef1f7;
+    --glow: #ffbf3f;
+    color-scheme: dark;
+  }
+}
+
+[data-theme="dark"] {
+  --bg: #090e1a;
+  --surface: #111829;
+  --ink: #e9edf5;
+  --accent: #6d88ff;
+  --accent-ink: #070b16;
+  --accent-2: #a9b9ff;
+  --soft: #1b2645;
+  --panel: #142052;
+  --panel-ink: #ffffff;
+  --panel-soft: #a9b9ff;
+  --cream: #eef1f7;
+  --glow: #ffbf3f;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-2: var(--accent-2);
+  --color-soft: var(--soft);
+  --color-panel: var(--panel);
+  --color-panel-ink: var(--panel-ink);
+  --color-panel-soft: var(--panel-soft);
+  --color-cream: var(--cream);
+  --color-glow: var(--glow);
+
+  --font-sans: var(--font-poppins), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-spin-slow: spin 18s linear infinite;
+  --animate-rise: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-pop: pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  --animate-float: float 6s ease-in-out infinite;
+}
+
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}
+@keyframes rise {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes pop {
+  from { opacity: 0; transform: scale(0); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes float {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -8px; }
+}
+
+@keyframes page-in {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes page-out {
+  to { opacity: 0; transform: translateY(-12px); }
+}
+
+/* Page switching (components/Pages.tsx). Without JS the attribute is never set,
+   so every page shows as one long scroll. The rule that reveals the active page
+   is generated from the page list in app/page.tsx. */
+html[data-page-active] [data-page] {
+  display: none;
+  animation: page-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+html[data-page-phase="out"] [data-page] {
+  animation: page-out 0.26s ease-in forwards;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+h1, h2, h3 {
+  text-wrap: balance;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html { scroll-behavior: auto; }
+}
